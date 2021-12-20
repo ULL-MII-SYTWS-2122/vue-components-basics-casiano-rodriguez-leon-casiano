@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue.js Components Fundamentals</title>
+  <script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
@@ -13,26 +14,73 @@
     <div class="content">
       <h1 class="title">Coffee Plans</h1>
 
+      <plan-picker v-bind:plans="plans"></plan-picker>
+
       <h2 class="subtitle">
         We travel the world to source the very best single origin coffee for you
       </h2>
 
-      <!-- write an emmet exppression to create as many items like this one:
-      <div class="plans">
-        <div class="plan">
-          <div class="description">
-            <span class="title">
-              The Single
-            </span>
-          </div>
-        </div>
-       ...
-      </div>  
-      -->
-    
+
+      <plan-picker v-bind:plans="plans2"></plan-picker>
+
     </div> <!-- content -->
   </div> <!-- app -->
 
+
+  <!-- plan component -->
+  <template id="plan-template">
+    <div class="plan">
+      <div class="description">
+        <span class="title">{{ name }}</span>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const planComponent = {
+      template: "#plan-template",
+      props: {
+        name: {
+          type: String,
+          required: true
+        }
+      }
+    }
+  </script>
+
+
+  <!-- plan-picker component -->
+
+  <template id="plan-picker-template">
+    <div class="plans">
+      <div v-for="plan in plans">
+        <plan v-bind:name="plan"></plan>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const planPicker = {
+      template: "#plan-picker-template",
+      components: {plan: planComponent }, 
+      props: {
+        'plans' : Array
+      }
+    }
+  </script>
+
+  <script> // main
+    const App = new Vue({
+      el: "#app",
+      components: {
+        "plan-picker": planPicker
+      },
+      data: {
+        plans: [ "the Curious", "The Addict", "The Single"],
+        plans2: [ "The Strong", "The Adventurous", "The Wise"]
+      }
+    })
+  </script>
   <link rel="stylesheet" href="style.css">
 </body>
 

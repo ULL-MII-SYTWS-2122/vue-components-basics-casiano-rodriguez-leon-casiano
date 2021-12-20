@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Counter</title>
+    <script src="https://unpkg.com/vue@2.6.14"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Click Counter Example</h1>
+        <click-counter click-title="The first counter is:"></click-counter>
+        <click-counter click-title="The second counter is:"></click-counter>
+        <click-counter click-title="The Third counter is:"></click-counter>
+    </div>
+
+    <!-- component click-counter -->
+    <template id="click-counter">
+        <div>
+            <p>{{ clickTitle }}</p>
+            <button @click="incCounter">{{counter}}</button>
+        </div>
+    </template>
+    <script>
+        const clickCounter = Vue.component("click-counter", {
+            template: "#click-counter",
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            props: {
+                "clickTitle": {
+                    type: String
+                }
+            },
+            methods: {
+                incCounter() {
+                    this.counter++;
+                }
+            }
+        })
+    </script>
+
+    <!-- main -->
+    <script>
+        const App = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+</html>
