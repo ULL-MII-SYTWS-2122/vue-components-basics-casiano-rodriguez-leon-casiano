@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vue.js Components Fundamentals</title>
+  <script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
@@ -17,22 +18,46 @@
         We travel the world to source the very best single origin coffee for you
       </h2>
 
-      <!-- write an emmet exppression to create as many items like this one:
+
       <div class="plans">
-        <div class="plan">
-          <div class="description">
-            <span class="title">
-              The Single
-            </span>
-          </div>
+        <div v-for="plan in plans">
+          <plan v-bind:name="plan"></plan>
         </div>
-       ...
-      </div>  
-      -->
+      </div>
     
     </div> <!-- content -->
   </div> <!-- app -->
 
+
+  <!-- plan component -->
+  <template id="plan">
+    <div class="plan">
+      <div class="description">
+        <span class="title">{{ name }}</span>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const planComponent = Vue.component('plan', {
+      template: "#plan",
+      props: {
+        name: {
+          type: String,
+          required: true
+        } 
+      }
+    })
+  </script>
+
+  <script> // main
+    const App = new Vue({
+      el: "#app",
+      data: {
+        plans: [ "The Hacker", "The Curious", "The Addict", "The Single" ]
+      }
+    })
+  </script>
   <link rel="stylesheet" href="style.css">
 </body>
 

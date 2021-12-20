@@ -35,19 +35,30 @@ See the solution working at <https://crguezl.github.io/vuejs-components-basics-p
 
 ### Check List
 
+- [ ]  All along, use as many [emmet expressions](https://docs.emmet.io/cheat-sheet/) as you can to speed up the edition
 - [ ] Set the initial HTML and load Vue from the CDN
 - [ ] Inside the app create the Vue app attached to the corresponding div element 
 - [ ] Create a component `click-counter` using `Vue.component`
   - [ ] Add the ´data` function that returns the object with the data. 
   - [ ] Set the `count`
-  - [ ] Set the template 
+  - [ ] Set the template as a String template
 - [ ] Add in the `app` div of the HTML the component just created
 - [ ] Insert new instances of the component in the HTML
 - [ ] Move the template from the `app.js` to the HTML using  a `script` tag
+- [ ]  Instead of `<script type= 'text/x-template' ...>` use the [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) HTML tag. 
+  Does it works?
 - [ ] Add a second element, a paragraph `the count is` to the `click-counter` component 
 - [ ] Wrap the two elements in a `<div>`
+- [ ] Move all the code from `app.js` to the HTML `index.html` 
+- [ ] Add a `prop` with name `click-title` to the `click-counter` component so that instead of the fixed `"the count is"`, the parent component can specify the prefix paragraph:
 
-Use as many [emmet expressions](https://docs.emmet.io/cheat-sheet/) as you can to speed up the edition
+  ```html
+    <click-counter click-title="The first counter is:"></click-counter>
+    <click-counter click-title="The second counter is:"></click-counter>
+    <click-counter click-title="The Third counter is:"></click-counter>
+  ```
+  Read the section [Prop Casing (camelCase vs kebab-case)](https://crguezl.github.io/learning-vue-geting-started-guide/#prop-casing-camelcase-vs-kebab-case)
+  of the *Annotated Reading of the Essentials Section of the Vue.js Guide*
 
 ## Folder plan-picker: Plan Picker Task
 
@@ -75,7 +86,9 @@ See the solution working at <https://crguezl.github.io/vuejs-components-basics-p
 
 ### Check List 
 
-- [ ] Use a minimum number of emmet expressions to generate complete the initial `index.html` to have it as at the beginning of the video [Reusable Components with Props](https://vueschool.io/lessons/reusable-components-with-props). The structure to replicate three or four times has to follow this pattern:
+#### [Reusable Components with Props](https://vueschool.io/lessons/reusable-components-with-props)
+  
+- [ ]  Use a minimum number of emmet expressions to generate complete the initial `index.html` to have it as at the beginning of the video [Reusable Components with Props](https://vueschool.io/lessons/reusable-components-with-props). The structure to replicate three or four times has to follow this pattern:
   
   ```html
         <div class="plans">
@@ -95,11 +108,21 @@ See the solution working at <https://crguezl.github.io/vuejs-components-basics-p
 - [ ] Add to the Vue app data the `plans` array of Strings with the names of the plans
 - [ ] Substitute the repetitions of the `<plan>` component  inside  the HTML for a `v-for`  loop
 - [ ] Specify that the `prop` `name` has to be of type `String` and is `required`
-- [ ] **Nested Components Video**: Create a component <plan-picker>  to encapsulate the `.plans` div
-- [ ] Create the template for the component and move the `plans`array into the component
+
+
+#### [Nested Components](https://vueschool.io/lessons/nested-components) Video
+
+- [ ] Create a component <plan-picker>  to encapsulate the `.plans` div
+- [ ] Create the template for the component and move the `plans` array into the component
 - [ ] Make the `plan` component local to the `plan-picker` component
 - [ ] Make the `plan-picker` component local to the root component
-- [ ] [Communication Between Components with Custom Events](https://vueschool.io/lessons/communication-between-components): We want to add the capability to select a plan. Add a boolean variable `selected` to the `plan` component
+
+
+#### [Communication Between Components with Custom Events](https://vueschool.io/lessons/communication-between-components) Video
+
+We want to add the capability to select a plan. 
+
+- [ ] Add a boolean variable `selected` to the `plan` component
 - [ ] Add a `select` method to the  `plan` component to set the component as `selected` 
 - [ ] Add the code so that when a user clicks on the corresponding `plan` component its `selected` variable is set to `true`
 - [ ] Using the object syntax for `v-bind` add a class `active-plan` when a `plan` component is selected
@@ -115,7 +138,7 @@ See the solution working at <https://crguezl.github.io/vuejs-components-basics-p
 - [ ] Add a computed property `isSelected` to the `plan` component that is `true` when the plan is the one selected
 - [ ] In the template of the `plan` component conditionally bind the class `active-plan` to the `.plan` div  if the plan has been selected
 - [ ] Inside the `plan-picker-template` pass the property `selectedPlan` to the children.
-  - [ ] Be carefull that HTML attributes are case insensitive but the name of the `plan` attribute we choose was `selectedPlan` (*CamelCase*) and so `v-bind:selectedPlan="..."` is not going to work. You have to use the equivalent *kebab-case* string
+  - [ ] Be carefull that HTML attributes are case insensitive but the name of the `plan` attribute we choose inside the JavaScript code was `selectedPlan` (*CamelCase*) and so to write `v-bind:selectedPlan="..."` is not going to work. You have to use the equivalent *kebab-case* string
 
 ## Skills Covered
 

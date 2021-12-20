@@ -10,15 +10,15 @@
 <body>
     <div id="app">
         <h1>Click Counter Example</h1>
-        <click-counter></click-counter>
-        <click-counter></click-counter>
-        <click-counter></click-counter>
+        <click-counter click-title="The first counter is:"></click-counter>
+        <click-counter click-title="The second counter is:"></click-counter>
+        <click-counter click-title="The Third counter is:"></click-counter>
     </div>
 
     <!-- component click-counter -->
     <template id="click-counter">
         <div>
-            <p>Counter is:</p>
+            <p>{{ clickTitle }}</p>
             <button @click="incCounter">{{counter}}</button>
         </div>
     </template>
@@ -28,6 +28,11 @@
             data() {
                 return {
                     counter: 0
+                }
+            },
+            props: {
+                "clickTitle": {
+                    type: String
                 }
             },
             methods: {
