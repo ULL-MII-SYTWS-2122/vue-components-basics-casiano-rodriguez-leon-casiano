@@ -19,14 +19,30 @@
       </h2>
 
 
-      <div class="plans">
-        <div v-for="plan in plans">
-          <plan v-bind:name="plan"></plan>
-        </div>
-      </div>
-    
+      <plan-picker v-bind:plans="plans"></plan-picker>
+      <plan-picker v-bind:plans="plans2"></plan-picker>
+
     </div> <!-- content -->
   </div> <!-- app -->
+
+  <!-- plan-picker component -->
+
+  <template id="plan-picker-template">
+    <div class="plans">
+      <div v-for="plan in plans">
+        <plan v-bind:name="plan"></plan>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Vue.component('plan-picker', {
+      template: "#plan-picker-template",
+      props: {
+        'plans' : Array
+      }
+    })
+  </script>
 
 
   <!-- plan component -->
@@ -45,7 +61,7 @@
         name: {
           type: String,
           required: true
-        } 
+        }
       }
     })
   </script>
@@ -54,7 +70,8 @@
     const App = new Vue({
       el: "#app",
       data: {
-        plans: [ "The Hacker", "The Curious", "The Addict", "The Single" ]
+        plans: [ "the Curious", "The Addict", "The Single"],
+        plans2: [ "The Strong", "The Adventurous", "The Wise"]
       }
     })
   </script>
