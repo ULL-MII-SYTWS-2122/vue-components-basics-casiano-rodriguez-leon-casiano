@@ -29,8 +29,8 @@
 
   <!-- plan component -->
   <template id="plan-template">
-    <div class="plan">
-      <div class="description">
+    <div @click="select" class="plan" :class="{'active-plan': isSelected }">
+      <div class="description" >
         <span class="title">{{ name }}</span>
       </div>
     </div>
@@ -43,6 +43,23 @@
         name: {
           type: String,
           required: true
+        },
+        selectedPlan: {
+          type: String
+        }
+      },
+      computed: {
+        isSelected() {
+          return (this.selectedPlan == this.name)
+        }
+      },
+      data() {
+        return {
+        }
+      },
+      methods: {
+        select() {
+          this.$emit('select', this.name)
         }
       }
     }
@@ -54,7 +71,7 @@
   <template id="plan-picker-template">
     <div class="plans">
       <div v-for="plan in plans">
-        <plan v-bind:name="plan"></plan>
+        <plan v-bind:name="plan" @select="selectPlan" :selected-plan="selectedPlan"></plan>
       </div>
     </div>
   </template>
@@ -65,6 +82,17 @@
       components: {plan: planComponent }, 
       props: {
         'plans' : Array
+      },
+      data() {
+        return {
+          selectedPlan: null
+        }
+      },
+      methods: {
+        selectPlan(planName) {
+          console.log("SelectPlan called! "+planName)
+          this.selectedPlan = planName
+        }
       }
     }
   </script>
